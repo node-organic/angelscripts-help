@@ -1,0 +1,30 @@
+{
+  "name": "angelscripts-help",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node ./tests/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/outbounder/angelscripts-help.git"
+  },
+  "dependencies": {
+    "underscore": "1.5.2",
+    "cli-table": "0.2.0"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.11.0",
+    "organic-angel": "~0.2.10"
+  },
+  "peerDependencies": {
+    "organic-angel": "~0.2.10"
+  },
+  "license": "MIT",
+  "description": "List all registered angel commands",
+  "bugs": {
+    "url": "https://github.com/outbounder/angelscripts-help/issues"
+  },
+  "homepage": "https://github.com/outbounder/angelscripts-help",
+  "author": "Boris Filipov"
+}
