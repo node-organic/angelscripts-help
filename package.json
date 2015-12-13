@@ -1,6 +1,6 @@
 {
   "name": "angelscripts-help",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node ./tests/"
@@ -15,10 +15,10 @@
   },
   "devDependencies": {
     "jasmine-node": "~1.11.0",
-    "organic-angel": "~0.2.10"
+    "organic-angel": "~0.3.x"
   },
   "peerDependencies": {
-    "organic-angel": "~0.2.x"
+    "organic-angel": "~0.3.x"
   },
   "license": "MIT",
   "description": "List all registered angel commands",
