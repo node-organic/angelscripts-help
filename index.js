@@ -17,6 +17,13 @@ var tableOpts = {
   ],
   wordWrap: true
 }
+var getTableRow = function (command, example, description) {
+  return [
+    { vAlign: 'center', content: command ? command.toString() : "missing command" },
+    { vAlign: 'center', content: example ? example.toString() : "missing example" },
+    { vAlign: 'top', content: description ? description.toString()  : "missing description" },
+  ]
+}
 
 module.exports = function(angel){
   angel.on("help", function(angel, next){
@@ -24,12 +31,11 @@ module.exports = function(angel){
     var table = new Table(tableOpts);
     for(var i = 0; i<$handlers.length; i++) {
       var originalPattern = $handlers[i].originalPattern
-      var helpText = [
+      table.push(getTableRow(
         originalPattern,
-        $handlers[i].example || "example missing",
-        $handlers[i].description || "description missing"
-      ]
-      table.push(helpText)
+        $handlers[i].example,
+        $handlers[i].description
+      ))
     }
     console.log(table.toString())
     next(null, table)
@@ -43,12 +49,11 @@ module.exports = function(angel){
     for(var i = 0; i<$handlers.length; i++)  {
       if($handlers[i].originalPattern.toString().match(angel.cmdData[1])) {
         var originalPattern = $handlers[i].originalPattern
-        var helpText = [
+        table.push(getTableRow(
           originalPattern,
-          $handlers[i].example || "example missing",
-          $handlers[i].description || "description missing"
-        ]
-        table.push(helpText)
+          $handlers[i].example,
+          $handlers[i].description
+        ))
       }
     }
     console.log(table.toString())
