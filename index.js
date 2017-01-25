@@ -5,12 +5,12 @@ module.exports = function(angel){
   angel.on("help", function(angel, next){
     var $handlers = angel.reactor.$handlers
     var table = new Table({
-      head: ['Command pattern', 'Example']
+      head: ['Command pattern', 'Example', 'Description']
     });
     for(var i = 0; i<$handlers.length; i++) {
       var helpText = {}
       var originalPattern = $handlers[i].originalPattern
-      helpText[originalPattern] = $handlers[i].example || "example missing"
+      helpText[originalPattern] = [$handlers[i].example || "example missing", $handlers[i].description || "description missing"]
       table.push(helpText)
     }
     console.log(table.toString())
@@ -22,13 +22,13 @@ module.exports = function(angel){
   angel.on(/help (.*)$/, function(angel, next){
     var $handlers = angel.reactor.$handlers
     var table = new Table({
-      head: ['Command pattern', 'Example']
+      head: ['Command pattern', 'Example', 'Description']
     });
     for(var i = 0; i<$handlers.length; i++)  {
       if($handlers[i].originalPattern.toString().match(angel.cmdData[1])) {
         var helpText = {}
         var originalPattern = $handlers[i].originalPattern
-        helpText[originalPattern] = $handlers[i].example || "example missing"
+        helpText[originalPattern] = [$handlers[i].example || "example missing", $handlers[i].description || "description missing"]
         table.push(helpText)
       }
     }
