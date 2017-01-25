@@ -1,16 +1,34 @@
-var Table = require("cli-table")
+var Table = require("cli-table2")
 var _ = require("underscore")
+var getWidthPercentage = function (percentage) {
+  var terminalWidth = process.stdout.columns || 100
+  return Math.floor(terminalWidth * percentage / 100) - 1
+}
+var tableOpts = {
+  head: ['Command pattern', 'Example', 'Description'],
+  style: {
+    head: [], // disable colors in header cells
+    border: [] // disable colors for the border
+  },
+  colWidths: [
+    getWidthPercentage(30),
+    getWidthPercentage(30),
+    getWidthPercentage(40)
+  ],
+  wordWrap: true
+}
 
 module.exports = function(angel){
   angel.on("help", function(angel, next){
     var $handlers = angel.reactor.$handlers
-    var table = new Table({
-      head: ['Command pattern', 'Example', 'Description']
-    });
+    var table = new Table(tableOpts);
     for(var i = 0; i<$handlers.length; i++) {
-      var helpText = {}
       var originalPattern = $handlers[i].originalPattern
-      helpText[originalPattern] = [$handlers[i].example || "example missing", $handlers[i].description || "description missing"]
+      var helpText = [
+        originalPattern,
+        $handlers[i].example || "example missing",
+        $handlers[i].description || "description missing"
+      ]
       table.push(helpText)
     }
     console.log(table.toString())
@@ -21,14 +39,15 @@ module.exports = function(angel){
 
   angel.on(/help (.*)$/, function(angel, next){
     var $handlers = angel.reactor.$handlers
-    var table = new Table({
-      head: ['Command pattern', 'Example', 'Description']
-    });
+    var table = new Table(tableOpts);
     for(var i = 0; i<$handlers.length; i++)  {
       if($handlers[i].originalPattern.toString().match(angel.cmdData[1])) {
-        var helpText = {}
         var originalPattern = $handlers[i].originalPattern
-        helpText[originalPattern] = [$handlers[i].example || "example missing", $handlers[i].description || "description missing"]
+        var helpText = [
+          originalPattern,
+          $handlers[i].example || "example missing",
+          $handlers[i].description || "description missing"
+        ]
         table.push(helpText)
       }
     }
