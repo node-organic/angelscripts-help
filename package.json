@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "underscore": "1.5.2",
-    "cli-table": "0.2.0"
+    "cli-table2": "0.2.0"
   },
   "devDependencies": {
     "jasmine-node": "~1.11.0",

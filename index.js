@@ -1,17 +1,41 @@
-var Table = require("cli-table")
+var Table = require("cli-table2")
 var _ = require("underscore")
+var getWidthPercentage = function (percentage) {
+  var terminalWidth = process.stdout.columns || 100
+  return Math.floor(terminalWidth * percentage / 100) - 1
+}
+var tableOpts = {
+  head: ['Command pattern', 'Example', 'Description'],
+  style: {
+    head: [], // disable colors in header cells
+    border: [] // disable colors for the border
+  },
+  colWidths: [
+    getWidthPercentage(30),
+    getWidthPercentage(30),
+    getWidthPercentage(40)
+  ],
+  wordWrap: true
+}
+var getTableRow = function (command, example, description) {
+  return [
+    { vAlign: 'center', content: command ? command.toString() : "missing command" },
+    { vAlign: 'center', content: example ? example.toString() : "missing example" },
+    { vAlign: 'top', content: description ? description.toString()  : "missing description" },
+  ]
+}
 
 module.exports = function(angel){
   angel.on("help", function(angel, next){
     var $handlers = angel.reactor.$handlers
-    var table = new Table({
-      head: ['Command pattern', 'Example']
-    });
+    var table = new Table(tableOpts);
     for(var i = 0; i<$handlers.length; i++) {
-      var helpText = {}
       var originalPattern = $handlers[i].originalPattern
-      helpText[originalPattern] = $handlers[i].example || "example missing"
-      table.push(helpText)
+      table.push(getTableRow(
+        originalPattern,
+        $handlers[i].example,
+        $handlers[i].description
+      ))
     }
     console.log(table.toString())
     next(null, table)
@@ -21,15 +45,15 @@ module.exports = function(angel){
 
   angel.on(/help (.*)$/, function(angel, next){
     var $handlers = angel.reactor.$handlers
-    var table = new Table({
-      head: ['Command pattern', 'Example']
-    });
+    var table = new Table(tableOpts);
     for(var i = 0; i<$handlers.length; i++)  {
       if($handlers[i].originalPattern.toString().match(angel.cmdData[1])) {
-        var helpText = {}
         var originalPattern = $handlers[i].originalPattern
-        helpText[originalPattern] = $handlers[i].example || "example missing"
-        table.push(helpText)
+        table.push(getTableRow(
+          originalPattern,
+          $handlers[i].example,
+          $handlers[i].description
+        ))
       }
     }
     console.log(table.toString())
