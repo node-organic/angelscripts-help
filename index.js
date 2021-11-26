@@ -80,12 +80,12 @@ module.exports = function(angel){
   .example("$ angel help.json")
   .description("brings short hand help with examples in json")
 
-  angel.addDefaultHandler(function (input, next) {
+  angel.addDefaultHandler(function (input) {
     if (input) {
       console.info('(!) "' + input + '" was not found in available commands, run $ angel help for more info')
     } else {
       console.info('(!) command is required')
     }
-    next()
+    throw new Error('failed to execute')
   })
 }

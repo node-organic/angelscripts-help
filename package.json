@@ -3,30 +3,28 @@
   "version": "0.2.0",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine-node ./tests/",
+    "test": "jasmine",
     "release-patch": "npm run test && npm version patch && npm publish && git push --tags && git push origin master",
-    "release-minor": "npm run test && npm version minor && npm publish && git push --tags && git push origin master"
+    "release-minor": "npm run test && npm version minor && npm publish && git push --tags && git push origin master",
+    "release-major": "npm run test && npm version major && npm publish && git push --tags && git push origin master"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/outbounder/angelscripts-help.git"
+    "url": "https://github.com/node-organic/angelscripts-help.git"
   },
   "dependencies": {
-    "underscore": "1.5.2",
-    "cli-table2": "0.2.0"
+    "cli-table2": "^0.2.0",
+    "underscore": "^1.13.1"
   },
   "devDependencies": {
-    "jasmine-node": "~1.11.0",
-    "organic-angel": "~0.3.x"
-  },
-  "peerDependencies": {
-    "organic-angel": "~0.3.x"
+    "jasmine": "^3.10.0",
+    "organic-angel": "^0.5.3"
   },
   "license": "MIT",
   "description": "List all registered angel commands",
   "bugs": {
-    "url": "https://github.com/outbounder/angelscripts-help/issues"
+    "url": "https://github.com/node-organic/angelscripts-help/issues"
   },
-  "homepage": "https://github.com/outbounder/angelscripts-help",
+  "homepage": "https://github.com/node-organic/angelscripts-help",
   "author": "Boris Filipov"
 }
