@@ -1,10 +1,10 @@
-var Table = require("cli-table2")
-var _ = require("underscore")
-var getWidthPercentage = function (percentage) {
-  var terminalWidth = process.stdout.columns || 100
+const Table = require("cli-table3")
+const _ = require("underscore")
+const getWidthPercentage = function (percentage) {
+  const terminalWidth = process.stdout.columns || 100
   return Math.floor(terminalWidth * percentage / 100) - 1
 }
-var tableOpts = {
+const tableOpts = {
   head: ['Command pattern', 'Example', 'Description'],
   style: {
     head: [], // disable colors in header cells
@@ -17,7 +17,7 @@ var tableOpts = {
   ],
   wordWrap: true
 }
-var getTableRow = function (command, example, description) {
+const getTableRow = function (command, example, description) {
   return [
     { vAlign: 'center', content: command ? command.toString() : "missing command" },
     { vAlign: 'center', content: example ? example.toString() : "missing example" },
