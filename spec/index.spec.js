@@ -13,7 +13,7 @@ describe("angelscripts help", function(){
     try {
       await instance.do("non existing")
     } catch (e) {
-      expect(e.message).toBe('failed to execute')
+      expect(e.message).toBe('failed to execute: non existing')
     }
   })
 })

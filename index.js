@@ -64,7 +64,7 @@ module.exports = function(angel){
 
   angel.on("help.json", function(angel, next){
     var $handlers = angel.reactor.$handlers
-    var table = []
+    var json = []
     for(var i = 0; i<$handlers.length; i++) {
       var helpText = {}
       var originalPattern = $handlers[i].originalPattern
@@ -72,10 +72,10 @@ module.exports = function(angel){
         example: $handlers[i].example || "example missing",
         description: $handlers[i].description || "description missing"
       }
-      table.push(helpText)
+      json.push(helpText)
     }
-    console.log(JSON.stringify(table))
-    next(null, table)
+    console.log(JSON.stringify(json))
+    next(null, json)
   })
   .example("$ angel help.json")
   .description("brings short hand help with examples in json")
@@ -86,6 +86,6 @@ module.exports = function(angel){
     } else {
       console.info('(!) command is required')
     }
-    throw new Error('failed to execute')
+    throw new Error('failed to execute: ' + input)
   })
 }
