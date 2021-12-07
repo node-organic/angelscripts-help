@@ -19,9 +19,9 @@ const tableOpts = {
 }
 const getTableRow = function (command, example, description) {
   return [
-    { vAlign: 'center', content: command ? command.toString() : "missing command" },
-    { vAlign: 'center', content: example ? example.toString() : "missing example" },
-    { vAlign: 'top', content: description ? description.toString()  : "missing description" },
+    { vAlign: 'center', content: command ? command.toString() : "" },
+    { vAlign: 'center', content: example ? example.toString() : "" },
+    { vAlign: 'top', content: description ? description.toString()  : "" },
   ]
 }
 
@@ -69,8 +69,8 @@ module.exports = function(angel){
       var helpText = {}
       var originalPattern = $handlers[i].originalPattern
       helpText[originalPattern] = {
-        example: $handlers[i].example || "example missing",
-        description: $handlers[i].description || "description missing"
+        example: $handlers[i].example || "",
+        description: $handlers[i].description || ""
       }
       json.push(helpText)
     }
